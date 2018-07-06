@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 
 public class Main extends Application implements EventHandler<ActionEvent>{
 	
-	Button button;
+	Button btnPlay, btnPause;
 
 	public static void main(String[] args) {
 		launch(args);
@@ -22,11 +22,16 @@ public class Main extends Application implements EventHandler<ActionEvent>{
 	public void start(Stage primaryStage) throws Exception {
 		primaryStage.setTitle("Titel");
 		
-		button = new Button("PLAY");
-		button.setOnAction(this);
+		btnPlay = new Button("PLAY");
+		btnPlay.setOnAction(this);
+		
+		
+		btnPause = new Button("PAUSE");
+		btnPlay.setOnAction(this);
 		
 		StackPane layout = new StackPane();
-		layout.getChildren().add(button);
+		layout.getChildren().add(btnPlay);
+		layout.getChildren().add(btnPause);
 		
 		Scene scene = new Scene(layout, 300, 250);
 		primaryStage.setScene(scene);
@@ -35,13 +40,13 @@ public class Main extends Application implements EventHandler<ActionEvent>{
 
 	@Override
 	public void handle(ActionEvent event) {
-		if (event.getSource() == button ) {
-			 Media media;
-				media = new Media("file:///D:/Musik/4-Alligatoah%20-%20Musik%20Ist%20Keine%20Lösung%20-%20Lass%20liegen.mp3");
-				MediaPlayer mp = new MediaPlayer(media);
-				mp.play();
-				
-	        
+		Media media;
+		media = new Media("file:///D:/Musik/4-Alligatoah%20-%20Musik%20Ist%20Keine%20Lösung%20-%20Lass%20liegen.mp3");
+		MediaPlayer mp = new MediaPlayer(media);
+		if (event.getSource() == btnPlay ) {
+			mp.play();	        
+		} else if (event.getSource() == btnPause) {
+			mp.pause();
 		}
 	}
 }
